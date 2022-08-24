@@ -1,0 +1,26 @@
+// Name: Freddy Velasco 
+// UIN:  327004703
+
+/**
+ * 8-way Or: 
+ * out = (in[0] or in[1] or ... or in[7])
+ */
+
+CHIP Or8Way {
+    IN in[8];
+    OUT out;
+
+    PARTS:
+    // Add up every bit using OR
+
+    Or(a=in[0], b=in[1], out=or1);
+    Or(a=in[2], b=in[3], out=or3);
+    Or(a=in[4], b=in[5], out=or5);
+    Or(a=in[6], b=in[7], out=or7);
+
+    Or(a=or1, b=or3, out=tmp1);
+    Or(a=or5, b=or7, out=tmp2);
+
+    Or(a=tmp1, b=tmp2, out=out);
+
+}

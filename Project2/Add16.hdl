@@ -1,0 +1,23 @@
+//NAME: Freddy Velasco
+//UIN: 327004703
+
+/**
+ * Adds two 16-bit values
+ * The chip performs out=a+b
+ * Both inputs a and b are UNSIGNED 
+ * The carry output is intentionally ignored
+ */
+
+
+CHIP Add16 {
+    IN a[16], b[16];
+    OUT out[16];
+
+    PARTS:
+   // Put you code here:
+    RCA4(A=a[0..3], B=b[0..3], cin=false, sum=out[0..3], cout=c01);
+    RCA4(A=a[4..7], B=b[4..7], cin=c01, sum=out[4..7], cout=c02);
+    RCA4(A=a[8..11], B=b[8..11], cin=c02, sum=out[8..11], cout=c03);
+    RCA4(A=a[12..15], B=b[12..15], cin=c03, sum=out[12..15], cout=false);
+
+}

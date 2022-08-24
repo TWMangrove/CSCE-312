@@ -1,0 +1,35 @@
+// Name: Freddy Velasco
+// UIN: 327004703
+
+/**
+ * Encoder 
+ * out always contains the encoded id of the active input
+ * at any time only one bit in a[8] can be 1
+ * idle is 1 if all inputs are inactive, otherwise it is 0
+ */
+
+CHIP Encoder83 {
+    IN a[8];
+    OUT out[3], idle;
+
+    PARTS:
+    // Check if any inputs are active
+    Or8Way(in=a[0..7], out=notidle);
+    Not(in=notidle, out=idle);
+
+    // out2 = a7 + a6 + a5 + a4
+    Or(a=a[7], b=a[6], out=tmp1);
+    Or(a=a[5], b=a[4], out=tmp2);
+    Or(a=tmp1, b=tmp2, out=out[2]);
+
+    // out1 = a7 + a6 + a3 + a2
+    Or(a=a[7], b=a[6], out=tmp3);
+    Or(a=a[3], b=a[2], out=tmp4);
+    Or(a=tmp3, b=tmp4, out=out[1]);
+
+    // out0 = a7 + a5 + a3 + a1
+    Or(a=a[7], b=a[5], out=tmp5);
+    Or(a=a[3], b=a[1], out=tmp6);
+    Or(a=tmp5, b=tmp6, out=out[0]);
+    
+}

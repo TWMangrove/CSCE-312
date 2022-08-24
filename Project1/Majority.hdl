@@ -1,0 +1,22 @@
+// Name: Freddy Velasco
+// UIN: 327004703
+/**
+ * 3-input Majority Function: 
+ * out = 1 if 1 is the majority bit in the input, 0 otherwise. 
+ * for example, if the input is a=1, b=0, c=1 then out = 1
+ * for example, if the input is a=1, b=0, c=0 then out = 0
+ */
+
+CHIP Majority {
+    
+    IN a, b, c;
+    OUT out;
+	
+    PARTS:
+    // Simplified Boolean expression: out = c(a xor b) + ab
+    Xor(a=a, b=b, out=axorb);
+    And(a=axorb, b=c, out=tmp);
+    And(a=a, b=b, out=aandb);
+    Or(a=tmp, b=aandb, out=out);
+
+}

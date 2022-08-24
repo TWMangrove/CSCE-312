@@ -1,0 +1,36 @@
+//NAME: Freddy Velasco
+//UIN: 327004703
+
+CHIP IsZero {
+
+    // This Chip is used to determine whether a 16 bit value is 0 or not
+    // If 0 it returns 1, otherwise returns 0 
+
+    IN a[16];
+    OUT out;
+
+    PARTS:
+    Or(a=a[0], b=a[1], out=or1);
+    Or(a=a[2], b=a[3], out=or2);
+    Or(a=a[4], b=a[5], out=or3);
+    Or(a=a[6], b=a[7], out=or4);
+    Or(a=a[8], b=a[9], out=or5);
+    Or(a=a[10], b=a[11], out=or6);
+    Or(a=a[12], b=a[13], out=or7);
+    Or(a=a[14], b=a[15], out=or8);
+
+    Or(a=or1, b=or2, out=or01);
+    Or(a=or3, b=or4, out=or02);
+    Or(a=or5, b=or6, out=or03);
+    Or(a=or7, b=or8, out=or04);
+
+    Or(a=or01, b=or02, out=or001);
+    Or(a=or03, b=or04, out=or002);
+
+    Or(a=or001, b=or002, out=tempout);
+
+    Not(in=tempout, out=out);
+
+
+
+}

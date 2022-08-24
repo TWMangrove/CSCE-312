@@ -1,0 +1,42 @@
+//NAME: Freddy Velasco
+//UIN: 327004703 
+
+/**
+ * Optimizes the carry propagation delay along RCA4 boundaries
+ * using duplication and parallel assembly of logic 
+ * The chip performs out=a+b
+ * Both inputs a and b are in UNSIGNED format
+ * carry output reflects the overflow 
+ */
+
+
+CHIP FastRCA12 {
+    IN a[12], b[12];
+    OUT out[12], carry;
+	
+    PARTS:
+    // Put your code here:
+    
+    // Use RCA4 for first four bits
+    RCA4(A=a[0..3], B=b[0..3], cin=false, sum=out[0..3], cout=c1);
+
+    // Perform two RCA4 for next four bits, changing the carry in each time
+    // This variables in this operation are not dependent on any others so it starts as soon as possible 
+    RCA4(A=a[4..7], B=b[4..7], cin=false, sum=possible1, cout=c2);
+    RCA4(A=a[4..7], B=b[4..7], cin=true, sum=possible2, cout=c3);
+
+    // Perform two RCA4 for next four bits, changing the carry in each time
+    RCA4(A=a[8..11], B=b[8..11], cin=false, sum=possible3, cout=c4);
+    RCA4(A=a[8..11], B=b[8..11], cin=true, sum=possible4, cout=c5);
+
+    // Select carry out of second RCA4 using the actual carry out of the first RCA
+    Mux(a=c2, b=c3, sel=c1, out=c6);
+
+    // Select result of second RCA4 depending on actual carry out of the first RCA
+    Mux16(a[0..3]=possible1, a[4..15]=false, b[0..3]=possible2, b[4..15]=false, sel=c1, out[0..3]=out[4..7], out[4..15]=false);
+    
+    // Repeat selection for last RCA
+    Mux(a=c4, b=c5, sel=c6, out=carry);
+    Mux16(a[0..3]=possible3, a[4..15]=false, b[0..3]=possible4, b[4..15]=false, sel=c6, out[0..3]=out[8..11], out[12..15]=false);
+
+}
