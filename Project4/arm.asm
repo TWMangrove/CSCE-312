@@ -1,5 +1,4 @@
-//NAME: Freddy Velasco
-//UIN: 327004703
+
 
 // File name: arm.asm
 
