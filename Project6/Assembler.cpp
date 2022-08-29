@@ -1,5 +1,4 @@
-// Name: Freddy Velasco
-// UIN: 327004703
+
 // Project Description: Program will ask the user for an file in HACK assembly language which it will then 
 //                      use to produce an equivalent file in HACK machine language. 
 // NOTE: The program is based on the "psuedo assembler" demonstrated during the video labs. So, while it is 
