@@ -1,5 +1,4 @@
-// Name: Freddy Velasco
-// UIN: 327004703
+
 // Project Description: This is a program which will take a .hack file written in HACK machine 
 //                      language and "disassemble" into an equivalent .asm file written in HACK 
 //                      assembly language
