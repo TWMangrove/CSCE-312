@@ -1,5 +1,4 @@
-// NAME: Freddy Velasco
-// UIN: 327004703
+
 /**
  * The complete address space of the Hack computer's memory,
  * including RAM and memory-mapped I/O. 
